@@ -7,4 +7,4 @@ def mymedia(value):
     if value:
         return f'/media/{value}'
 
-    return 'static/img.png'
+    return '/static/img.png'

@@ -85,7 +85,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+# django-dotenv - пакет для переменных окружения
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
