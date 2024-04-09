@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+# django-dotenv - пакет для переменных окружения
+
+load_dotenv()
+PASSWORD = os.getenv("My_PostgreSQL_password")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,12 +86,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dz_20_2',
         'USER': 'postgres',
-        'PASSWORD': 7943,
+        'PASSWORD': PASSWORD,
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-# django-dotenv - пакет для переменных окружения
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
