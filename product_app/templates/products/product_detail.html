@@ -8,13 +8,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <img class="img-fluid"
-                         src="{{ title.photo|mymedia }}"
+                         src="{{ object.photo|mymedia }}"
                          alt="image">
                 </div>
                 <div class="col-md-6">
-                    <!-- h2>{{ title.name }}</h2 -->
-                    <p><strong>Цена:</strong> {{ title.price }}</p>
-                    <p><strong>Описание:</strong> {{ title.description }}</p>
+                    <!-- h2>{{ object.name }}</h2 -->
+                    <p><strong>Цена:</strong> {{ object.price }}</p>
+                    <p><strong>Описание:</strong> {{ object.description }}</p>
+                    <p><strong>Просмотры:</strong> {{ object.views }}</p>
                 </div>
             </div>
         </div>
