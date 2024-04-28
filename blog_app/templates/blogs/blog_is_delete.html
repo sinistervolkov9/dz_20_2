@@ -1,0 +1,16 @@
+{% extends 'blogs/base.html' %}
+{% load static %}
+{% block content  %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <p class="card-text">Удалить блог {{object.title}}?</p>
+            <form class="row" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Удалить</button>
+                <a href="{% url 'blogs:blog_list' %}" class="btn btn-sm btn-outline-secondary">Отменить</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

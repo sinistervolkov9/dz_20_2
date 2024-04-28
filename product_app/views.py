@@ -12,7 +12,7 @@ class IndexView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(is_published=True).order_by('-id')[:3]
+        return queryset.order_by('-id')[:3]
 
 
 class ProductListView(ListView):
@@ -22,9 +22,9 @@ class ProductListView(ListView):
     # queryset = Product.objects.all()
     extra_context = {'title': 'Все товары'}
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(is_published=True)
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     return queryset.filter(is_published=True)
 
 
 class ProductDetailView(DetailView):
@@ -34,17 +34,11 @@ class ProductDetailView(DetailView):
     pk_url_kwarg = 'product_id'
     extra_context = {'title': 'Товар'}
 
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
-        obj.views += 1
-        obj.save()
-        return obj
-
 
 class ProductCreateView(CreateView):
     model = Product
     template_name = 'products/product_form.html'
-    fields = ('name', 'price', 'description', 'photo', 'is_published')
+    fields = ('name', 'price', 'description', 'photo')
     success_url = reverse_lazy('products:product_list')
 
     def form_valid(self, form):
@@ -61,7 +55,7 @@ class ProductUpdateView(UpdateView):
     model = Product
     template_name = 'products/product_form.html'
     pk_url_kwarg = 'product_id'
-    fields = ('name', 'price', 'description', 'photo', 'is_published')
+    fields = ('name', 'price', 'description', 'photo')
 
     def get_success_url(self):
         return reverse_lazy('products:product_detail', kwargs={'product_id': self.object.pk})

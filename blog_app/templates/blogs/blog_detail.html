@@ -1,0 +1,24 @@
+{% extends 'blogs/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+<div class="row">
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img class="img-fluid"
+                         src="{{ object.preview|mymedia }}"
+                         alt="image">
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Заголовок:</strong> {{ object.title }}</p>
+                    <p><strong>Содержимое:</strong> {{ object.content }}</p>
+                    <p><strong>Дата создания:</strong> {{ object.created_at }}</p>
+                    <p><strong>Просмотры:</strong> {{ object.views }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
