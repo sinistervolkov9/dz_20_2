@@ -15,6 +15,11 @@
                     <!-- h2>{{ object.name }}</h2 -->
                     <p><strong>Цена:</strong> {{ object.price }}</p>
                     <p><strong>Описание:</strong> {{ object.description }}</p>
+                    {% if active_version %}
+                    <p><strong>Последняя версия:</strong> {{ active_version.version_number }}</p>
+                    {% else %}
+                    <p><strong>Последняя версия:</strong> -</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
