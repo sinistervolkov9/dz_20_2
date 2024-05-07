@@ -34,6 +34,9 @@ class ProductForm(StyleMixin, ModelForm):
     def clean_description(self):
         description = self.cleaned_data.get('description')
 
+        if not description:
+            return None
+
         for word in FORBIDDEN_WORDS:
             if word in description.lower():
                 raise forms.ValidationError(f"{word}' - это запрещенное слово")

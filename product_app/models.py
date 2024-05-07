@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -30,3 +31,10 @@ class Version(models.Model):
     class Meta:
         verbose_name = 'Версия'
         verbose_name_plural = 'Версии'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['product'],
+                condition=Q(is_current_version=True),
+                name='only_one_active_version_for_product',
+            ),
+        ]
