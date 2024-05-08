@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.utils.text import slugify
 from .models import Blogpost
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class BlogpostListView(ListView):
@@ -29,23 +30,53 @@ class BlogpostDetailView(DetailView):
         return obj
 
 
-class BlogpostCreateView(CreateView):
+# class BlogpostCreateView(CreateView):
+#     model = Blogpost
+#     template_name = 'blogs/blog_form.html'
+#     fields = ('title', 'content', 'preview', 'is_published')
+#     success_url = reverse_lazy('blogs:blog_list')
+#
+#     def form_valid(self, form):
+#         if form.is_valid():
+#             blog = form.save(commit=False)
+#             blog.slug = slugify(blog.title)
+#             blog.save()
+#             return super().form_valid(form)
+#         else:
+#             return self.form_invalid(form)
+#
+#
+# class BlogpostUpdateView(UpdateView):
+#     model = Blogpost
+#     template_name = 'blogs/blog_form.html'
+#     pk_url_kwarg = 'blog_id'
+#     fields = ('title', 'content', 'preview', 'is_published')
+#
+#     def get_success_url(self):
+#         return reverse_lazy('blogs:blog_detail', kwargs={'blog_id': self.object.pk})
+#
+#
+# class BlogpostDeleteView(DeleteView):
+#     model = Blogpost
+#     template_name = 'blogs/blog_is_delete.html'
+#     pk_url_kwarg = 'blog_id'
+#     success_url = reverse_lazy('blogs:blog_list')
+
+class BlogpostCreateView(LoginRequiredMixin, CreateView):
     model = Blogpost
     template_name = 'blogs/blog_form.html'
     fields = ('title', 'content', 'preview', 'is_published')
     success_url = reverse_lazy('blogs:blog_list')
 
     def form_valid(self, form):
-        if form.is_valid():
-            blog = form.save(commit=False)
-            blog.slug = slugify(blog.title)
-            blog.save()
-            return super().form_valid(form)
-        else:
-            return self.form_invalid(form)
+        # Привязываем текущего пользователя к создаваемой записи блога
+        form.instance.author = self.request.user
+        # Генерируем slug из заголовка записи блога
+        form.instance.slug = slugify(form.instance.title)
+        return super().form_valid(form)
 
 
-class BlogpostUpdateView(UpdateView):
+class BlogpostUpdateView(LoginRequiredMixin, UpdateView):
     model = Blogpost
     template_name = 'blogs/blog_form.html'
     pk_url_kwarg = 'blog_id'
@@ -55,7 +86,7 @@ class BlogpostUpdateView(UpdateView):
         return reverse_lazy('blogs:blog_detail', kwargs={'blog_id': self.object.pk})
 
 
-class BlogpostDeleteView(DeleteView):
+class BlogpostDeleteView(LoginRequiredMixin, DeleteView):
     model = Blogpost
     template_name = 'blogs/blog_is_delete.html'
     pk_url_kwarg = 'blog_id'

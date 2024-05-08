@@ -1,0 +1,132 @@
+[
+  {
+    "model": "product_app.product",
+    "pk": 1,
+    "fields": {
+      "name": "Телефон",
+      "price": "10000.00",
+      "description": "Новый, только с завода",
+      "photo": "products/vxwvjs3ubd5tvn9ph5jujyl8ufq36kuf.jpeg"
+    }
+  },
+  {
+    "model": "product_app.product",
+    "pk": 2,
+    "fields": {
+      "name": "Компик",
+      "price": "15000.00",
+      "description": "Танки потянет",
+      "photo": "products/1606668849_32-p-fon-starii-kompyuter-43.jpg"
+    }
+  },
+  {
+    "model": "product_app.product",
+    "pk": 3,
+    "fields": {
+      "name": "Тостер",
+      "price": "1545.00",
+      "description": "У моего соседа такой же",
+      "photo": ""
+    }
+  },
+  {
+    "model": "product_app.product",
+    "pk": 4,
+    "fields": {
+      "name": "Пылесос",
+      "price": "25000.00",
+      "description": "Как новый",
+      "photo": "products/1.jpg"
+    }
+  },
+  {
+    "model": "product_app.product",
+    "pk": 35,
+    "fields": {
+      "name": "Лампа",
+      "price": "10.00",
+      "description": "Нормальная лампа",
+      "photo": "products/png-transparent-lighting-table-lamp-light-fixture-light-light-fixture-angle-lamp.png"
+    }
+  },
+  {
+    "model": "product_app.product",
+    "pk": 41,
+    "fields": {
+      "name": "Ручка",
+      "price": "1900.00",
+      "description": "Пишет",
+      "photo": ""
+    }
+  },
+  {
+    "model": "product_app.product",
+    "pk": 42,
+    "fields": {
+      "name": "Продукт",
+      "price": "100.00",
+      "description": null,
+      "photo": ""
+    }
+  },
+  {
+    "model": "product_app.version",
+    "pk": 1,
+    "fields": {
+      "product": 35,
+      "version_number": "10",
+      "version_name": "abc",
+      "is_current_version": true
+    }
+  },
+  {
+    "model": "product_app.version",
+    "pk": 14,
+    "fields": {
+      "product": 41,
+      "version_number": "5",
+      "version_name": "vers",
+      "is_current_version": false
+    }
+  },
+  {
+    "model": "product_app.version",
+    "pk": 15,
+    "fields": {
+      "product": 35,
+      "version_number": "15",
+      "version_name": "versssssssssss",
+      "is_current_version": false
+    }
+  },
+  {
+    "model": "product_app.version",
+    "pk": 16,
+    "fields": {
+      "product": 4,
+      "version_number": "100",
+      "version_name": "new_vers",
+      "is_current_version": true
+    }
+  },
+  {
+    "model": "product_app.version",
+    "pk": 17,
+    "fields": {
+      "product": 41,
+      "version_number": "15",
+      "version_name": "abc",
+      "is_current_version": true
+    }
+  },
+  {
+    "model": "product_app.version",
+    "pk": 18,
+    "fields": {
+      "product": 42,
+      "version_number": "1d",
+      "version_name": "vers",
+      "is_current_version": true
+    }
+  }
+]
