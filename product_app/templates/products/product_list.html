@@ -23,7 +23,7 @@
                         <!-- button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button -->
                         <a href="{% url 'product_app:product_detail' object.id %}"
                            class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                        {% if user.is_authenticated %}
+                        {% if perms.product_app.can_edit_publish and perms.product_app.can_edit_description and perms.product_app.can_edit_category or user == object.owner %}
                         <a href="{% url 'product_app:product_update' object.id %}"
                            class="btn btn-sm btn-outline-secondary">Изменить</a>
                         <a href="{% url 'product_app:product_delete' object.id %}"

@@ -65,7 +65,7 @@ class BlogpostDetailView(DetailView):
 class BlogpostCreateView(LoginRequiredMixin, CreateView):
     model = Blogpost
     template_name = 'blogs/blog_form.html'
-    fields = ('title', 'content', 'preview', 'is_published')
+    fields = ('title', 'content', 'preview', 'photo', 'is_published')
     success_url = reverse_lazy('blogs:blog_list')
 
     def form_valid(self, form):

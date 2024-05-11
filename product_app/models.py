@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models import Q
+from catalog_app.models import Category
+from users.models import User
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -7,9 +9,12 @@ NULLABLE = {'blank': True, 'null': True}
 class Product(models.Model):
     # ID = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100, verbose_name='Название')
+    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE, default=1, related_name='products')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
     description = models.CharField(max_length=250, **NULLABLE, verbose_name='Описание')
     photo = models.ImageField(upload_to='products/', **NULLABLE, verbose_name='Фото')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Владелец', **NULLABLE)
+    is_published = models.BooleanField(default=True, verbose_name='Опубликовать?')
 
     def __str__(self):
         return f'{self.name}'
@@ -17,6 +22,12 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+
+        permissions = [
+            ("can_edit_publish", "Can edit publish"),
+            ("can_edit_description", "Can edit description"),
+            ("can_edit_category", "Can edit category"),
+                       ]
 
 
 class Version(models.Model):

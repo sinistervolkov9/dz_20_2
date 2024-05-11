@@ -44,6 +44,35 @@ class ProductForm(StyleMixin, ModelForm):
         return description
 
 
+class ProductManagerForm(StyleMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published')
+        # fields = '__all__'
+        # exclude = ('price', )
+
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+
+        for word in FORBIDDEN_WORDS:
+            if word in name.lower():
+                raise forms.ValidationError(f"'{word}' - это запрещенное слово")
+
+        return name
+
+    def clean_description(self):
+        description = self.cleaned_data.get('description')
+
+        if not description:
+            return None
+
+        for word in FORBIDDEN_WORDS:
+            if word in description.lower():
+                raise forms.ValidationError(f"{word}' - это запрещенное слово")
+
+        return description
+
+
 class VersionForm(StyleMixin, forms.ModelForm):
 
     class Meta:
