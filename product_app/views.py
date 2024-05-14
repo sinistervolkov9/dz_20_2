@@ -5,6 +5,7 @@ from .models import Product, Version
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from product_app.services import get_products_from_cache
 
 
 class IndexView(ListView):
@@ -53,9 +54,8 @@ class ProductListView(ListView):
         return context
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(is_published=True)
-
+        return get_products_from_cache()
+        # return Product.objects.all()
 
 class ProductDetailView(DetailView):
     model = Product
